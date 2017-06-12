@@ -86,7 +86,8 @@ public class DrawbleImmediatelyAction extends AnAction {
             assert files != null;
             if (files[i].isDirectory()) {
                 File[] filesOFabsoluteFile = files[i].listFiles();
-//                BufferedImage read = ImageIO.read(filesOFabsoluteFile[0]);
+                //old 办法
+                //BufferedImage read = ImageIO.read(filesOFabsoluteFile[0]);
                 String drawablePath = "drawable";
                 switch (i) {
                     case 1: {
@@ -114,7 +115,8 @@ public class DrawbleImmediatelyAction extends AnAction {
                 if (!fileCopy.exists()) {
                     fileCopy.mkdirs();
                 }
-//                ImageIO.write(read, "png", new File(project.getBasePath() + "/app/src/main/res/" + drawablePath + "/" + photoName + ".png"));
+                //old 办法
+                //ImageIO.write(read, "png", new File(project.getBasePath() + "/app/src/main/res/" + drawablePath + "/" + photoName + ".png"));
 
                 File photoNameFile = new File(project.getBasePath() + "/app/src/main/res/" + drawablePath + "/" + photoName + ".png");
                 if (photoNameFile.exists()) {
