@@ -1,0 +1,41 @@
+<idea-plugin>
+  <id>com.your.company.unique.plugin.id</id>
+  <name>photo一键导入插件</name>
+  <version>1.3</version>
+  <vendor email="lishaowei@boxfish.cn" url="https://github.com/chrisLeeCreate">BOXFiSH</vendor>
+
+  <description><![CDATA[
+      导入图片到drawable.<br>
+      <em>most HTML tags may be used</em>
+    ]]></description>
+
+  <change-notes><![CDATA[
+  <change-notes><![CDATA[
+      修复了没有文件夹的时候崩溃bug.<br>
+
+    ]]>
+  </change-notes>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="145.0"/>
+
+  <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <!-- uncomment to enable plugin in all products
+  <depends>com.intellij.modules.lang</depends>
+  -->
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
+
+  <actions>
+    <!-- Add your actions here -->
+    <action id="putDrawbleImmediately" class="DrawbleImmediatelyAction" text="putDrawbleImmediatelyAction"
+            description="一键放入drawable的插件">
+      <add-to-group group-id="GenerateGroup" anchor="first"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="meta N"/>
+    </action>
+  </actions>
+
+</idea-plugin>
