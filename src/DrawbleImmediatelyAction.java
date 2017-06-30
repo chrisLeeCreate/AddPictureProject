@@ -62,7 +62,7 @@ public class DrawbleImmediatelyAction extends AnAction {
                     return;
                 }
                 if (photoName.equals("")) {
-                    Messages.showInfoMessage(project, "please enter a valid path", "warning");
+                    Messages.showInfoMessage(project, "please enter a valid photoName", "warning");
                     return;
                 }
                 try {
@@ -86,30 +86,21 @@ public class DrawbleImmediatelyAction extends AnAction {
             assert files != null;
             if (files[i].isDirectory()) {
                 File[] filesOFabsoluteFile = files[i].listFiles();
+                String absolutePath = filesOFabsoluteFile[0].getAbsolutePath();
+                System.out.println("absolutePath:" + absolutePath);
                 //old 办法
                 //BufferedImage read = ImageIO.read(filesOFabsoluteFile[0]);
                 String drawablePath = "drawable";
-                switch (i) {
-                    case 1: {
-                        drawablePath = "drawable-hdpi";
-                        break;
-                    }
-                    case 2: {
-                        drawablePath = "drawable-mdpi";
-                        break;
-                    }
-                    case 3: {
-                        drawablePath = "drawable-xhdpi";
-                        break;
-                    }
-                    case 4: {
-                        drawablePath = "drawable-xxhdpi";
-                        break;
-                    }
-                    case 5: {
-                        drawablePath = "drawable-xxxhdpi";
-                        break;
-                    }
+                if (absolutePath.contains("drawable-hdpi")) {
+                    drawablePath = "drawable-hdpi";
+                } else if (absolutePath.contains("drawable-mdpi")) {
+                    drawablePath = "drawable-mdpi";
+                } else if (absolutePath.contains("drawable-xhdpi")) {
+                    drawablePath = "drawable-xhdpi";
+                } else if (absolutePath.contains("drawable-xxhdpi")) {
+                    drawablePath = "drawable-xxhdpi";
+                } else if (absolutePath.contains("drawable-xxxhdpi")) {
+                    drawablePath = "drawable-xxxhdpi";
                 }
                 File fileCopy = new File(project.getBasePath() + "/app/src/main/res/" + drawablePath);
                 if (!fileCopy.exists()) {
@@ -124,9 +115,9 @@ public class DrawbleImmediatelyAction extends AnAction {
                     return;
                 }
                 Files.copy(filesOFabsoluteFile[0].toPath(), new File(project.getBasePath() + "/app/src/main/res/" + drawablePath + "/" + photoName + ".png").toPath());
-
             }
         }
+        Messages.showInfoMessage(project, "Congratulations, add pictures to success!", "Tip");
     }
 
     /**
