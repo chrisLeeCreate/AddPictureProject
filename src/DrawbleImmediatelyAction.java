@@ -111,7 +111,7 @@ public class DrawbleImmediatelyAction extends AnAction {
 
                 File photoNameFile = new File(project.getBasePath() + "/app/src/main/res/" + drawablePath + "/" + photoName + ".png");
                 if (photoNameFile.exists()) {
-                    Messages.showInfoMessage(project, "this is a exist photoName,pleace change a new name", "warning");
+                    Messages.showInfoMessage(project, "this is a exist photoName , pleace change a new name", "warning");
                     return;
                 }
                 Files.copy(filesOFabsoluteFile[0].toPath(), new File(project.getBasePath() + "/app/src/main/res/" + drawablePath + "/" + photoName + ".png").toPath());
