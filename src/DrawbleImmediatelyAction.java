@@ -23,14 +23,15 @@ import java.nio.file.Files;
 public class DrawbleImmediatelyAction extends AnAction {
 
     private Project project;
-    private String photoLocalPath;
-    private String photoName;
-    private String packageName = ""; //包名
+    private String photoLocalPath;  //图片在你电脑的全路径
+    private String photoName; //你给图片起的名字
+    private String moduleNamePath = "app"; //图片放入的module名字 默认app
+//    private String packageName = ""; //包名
 
     @Override
     public void actionPerformed(AnActionEvent e) {
         project = e.getData(PlatformDataKeys.PROJECT);
-        packageName = getPackageName();
+//        packageName = getPackageName();
         initDialog();
         refreshProject(e);
 
@@ -48,10 +49,11 @@ public class DrawbleImmediatelyAction extends AnAction {
     private void initDialog() {
         DrawableDialog drawableDialog = new DrawableDialog(new DrawableDialog.DialogCallBack() {
             @Override
-            public void callBack(String photoPath, String photoNametextField) {
+            public void callBack(String photoPath, String photoNametextField, String moduleName) {
                 System.out.println(photoPath);
                 photoLocalPath = photoPath;
                 photoName = photoNametextField;
+                moduleNamePath = moduleName;
                 if (photoLocalPath.equals("")) {
                     Messages.showInfoMessage(project, "please enter a valid path", "warning");
                     return;
@@ -102,19 +104,22 @@ public class DrawbleImmediatelyAction extends AnAction {
                 } else if (absolutePath.contains("drawable-xxxhdpi")) {
                     drawablePath = "drawable-xxxhdpi";
                 }
-                File fileCopy = new File(project.getBasePath() + "/app/src/main/res/" + drawablePath);
+
+
+                String filePath = "/" + moduleNamePath + "/src/main/res/";
+                File fileCopy = new File(project.getBasePath() + filePath + drawablePath);
                 if (!fileCopy.exists()) {
                     fileCopy.mkdirs();
                 }
                 //old 办法
                 //ImageIO.write(read, "png", new File(project.getBasePath() + "/app/src/main/res/" + drawablePath + "/" + photoName + ".png"));
 
-                File photoNameFile = new File(project.getBasePath() + "/app/src/main/res/" + drawablePath + "/" + photoName + ".png");
+                File photoNameFile = new File(project.getBasePath() + filePath + drawablePath + "/" + photoName + ".png");
                 if (photoNameFile.exists()) {
                     Messages.showInfoMessage(project, "this is a exist photoName , pleace change a new name", "warning");
                     return;
                 }
-                Files.copy(filesOFabsoluteFile[0].toPath(), new File(project.getBasePath() + "/app/src/main/res/" + drawablePath + "/" + photoName + ".png").toPath());
+                Files.copy(filesOFabsoluteFile[0].toPath(), new File(project.getBasePath() + filePath + drawablePath + "/" + photoName + ".png").toPath());
             }
         }
         Messages.showInfoMessage(project, "Congratulations, add pictures to success!", "Tip");

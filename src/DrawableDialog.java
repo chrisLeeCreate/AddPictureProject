@@ -10,6 +10,7 @@ public class DrawableDialog extends JDialog {
     private JButton buttonCancel;
     private JTextField photoPathTextField;
     private JTextField photoNametextField;
+    private JTextField moduleNamePath;
     private DialogCallBack dialogCallBack;
 
     public DrawableDialog(DialogCallBack dialogCallBack) {
@@ -50,7 +51,7 @@ public class DrawableDialog extends JDialog {
     private void onOK() {
         // add your code here
         if (dialogCallBack != null) {
-            dialogCallBack.callBack(photoPathTextField.getText().trim(), photoNametextField.getText().trim());
+            dialogCallBack.callBack(photoPathTextField.getText().trim(), photoNametextField.getText().trim(), moduleNamePath.getText().trim());
         }
         dispose();
     }
@@ -63,7 +64,7 @@ public class DrawableDialog extends JDialog {
     public static void main(String[] args) {
         DrawableDialog dialog = new DrawableDialog(new DialogCallBack() {
             @Override
-            public void callBack(String photoPath, String photoNametextField) {
+            public void callBack(String photoPath, String photoNametextField, String moduleNamePath) {
                 System.out.println(photoPath);
 
 
@@ -111,7 +112,7 @@ public class DrawableDialog extends JDialog {
     }
 
     public interface DialogCallBack {
-        void callBack(String photoPath, String photoNametextField);
+        void callBack(String photoPath, String photoNametextField, String moduleNamePath);
     }
 
 }
